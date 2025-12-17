@@ -1,0 +1,108 @@
+﻿behaeiry = {
+	language = behaeiry_dialect
+	
+	color = color_culture_behaeiry
+	
+	tags = { egyptian_gfx middle_east_gfx mediterranean_gfx }
+
+	opinions = {
+		sahiydi = positive
+		bedouin_culture = kindred
+		libyan_arabic_culture = kindred
+		masry_araby = positive
+	}
+	
+	culture_groups = {
+		masry_group
+	}		
+}
+
+sahiydi = { # Upper Egypt
+	language = sahiydi_dialect 
+	
+	color = color_culture_sahiydi
+	
+	tags = { egyptian_gfx middle_east_gfx }
+
+	opinions = {
+		behaeiry = positive
+		bedouin_culture = kindred
+		libyan_arabic_culture = kindred
+		masry_araby = positive
+	}	
+	
+	culture_groups = {
+		masry_group
+	}	
+}
+
+bedouin_culture = { 
+	language = egyptian_dialect 
+	
+	color = color_culture_bedouin
+	
+	tags = { egyptian_gfx middle_east_gfx}
+
+	opinions = {
+		behaeiry = kindred
+		sahiydi = kindred
+		bedouin_culture = kindred
+		libyan_arabic_culture = kindred
+	}	
+	
+	culture_groups = {
+		arabic_group
+	}	
+}
+
+libyan_arabic_culture = {
+	language = maghrebi_dialect 
+	
+	color = color_culture_libyan_arabic
+	
+	tags = { maghrebi_gfx middle_east_gfx}
+
+	opinions = {
+		behaeiry = kindred
+		sahiydi = kindred
+		bedouin_culture = kindred
+		libyan_arabic_culture = kindred
+		masry_araby = positive
+	}	
+	
+	culture_groups = {
+		arabic_group
+		maghrebi_group
+	}	
+}
+
+toubou_culture = {
+	language = saharan_language 
+	
+	color = color_culture_fezzan
+	
+	tags = { maghrebi_gfx middle_east_gfx}
+
+	opinions = {
+	}
+}
+
+masry_araby = {
+	language = egyptian_dialect 
+	
+	color = color_culture_masry_araby
+	
+	tags = { egyptian_gfx middle_east_gfx }
+
+	opinions = {
+		behaeiry = positive
+		sahiydi = positive
+		libyan_arabic_culture = positive
+	}
+	
+	culture_groups = {
+		masry_group
+		arabic_group
+	}
+}
+

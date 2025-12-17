@@ -1,0 +1,13 @@
+﻿karimy_merchants = {
+	age = age_1_traditions
+	potential = {
+		culture = {
+			has_culture_group = culture_group:masry_group
+		}
+	}
+
+	requires = feudalism_advance
+	merchant_maintenance_cost  = -0.1
+}
+
+

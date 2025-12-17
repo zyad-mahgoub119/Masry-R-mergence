@@ -1,0 +1,181 @@
+﻿
+masry_language = {
+	color = color_language_masry
+	
+	male_names = {
+		name_aaron name_abraham name_abyon name_adrae name_aefonkh name_akram name_alexander name_ali name_alynos name_amoun name_ananiel name_anastasius name_anyanos name_anoup name_anthony name_anwar name_arsenios name_arsenios name_askla name_athanasius name_athom name_azyz
+		name_babhnoudy name_banikyros name_benjamin name_bakhom name_bane name_banehas name_banine name_baniran name_bashondy name_basil name_bdolemaios name_bemsah name_besady name_betebhre name_bhanisneoy name_bhanoub name_bhyb name_bidjimy name_bidjol name_bilihew name_birow name_bishoy name_bishennoufy name_bisthay name_blotinos name_boblyos name_bthah 
+		name_christopher name_claude name_clemence name_constantine name_cornelius name_cosmas name_cyril
+		name_damian name_daniel name_david name_demetrius name_dydwe
+		name_djimous name_djory name_tchinousy
+		name_aefonkh
+		name_elias name_epifanio name_eugene
+		name_faustus name_flavius name_foad
+		name_gabriel name_george
+		name_haby name_harmine name_hercules name_herwodj name_hor name_horsiesy 
+		name_isaac name_iskhuron
+		name_james name_john name_joseph
+		name_kelloudj name_khairemon name_kharakhde name_khnoum name_kyriakos
+		name_lashyn
+		name_mahgoub name_manethon name_mark name_marwan name_matthias name_mena name_mercurius name_mesilhy name_michael name_milios name_min name_mnewy name_mont nmae_mouiz
+		name_nahrow name_nawerho name_nefthem name_nicholas name_nizar name_noun
+		name_orygen name_ousire
+		name_patermouthios name_paul name_peter name_philip name_phoebumoun name_phoebus name_poimen
+		name_ramsis name_raphael name_rweys
+		name_salah name_samael name_sarathiel name_sedakiel name_set name_severus name_simeon
+		name_shenoudi name_shons name_soter name_souk name_souriel name_stephen
+		name_thawfy name_thedmosy name_theodore name_thowt
+		name_victor
+		name_wadymon name_waros name_wenofer name_wenipi name_wershenoufi name_wesa
+		name_zahyr name_zechariah name_zenon name_zyad
+		
+	}	
+	female_names = {
+	    name_aidesia name_alexandra name_alya name_aloly name_alwan name_amawny name_amra name_anastasia name_anisa name_anouki name_antonia name_arisone name_arwa name_asenneth name_asmaa name_asofper name_athanasia name_aurelia
+		name_berenice name_bernoufi name_bhoiwa
+		name_catherine name_cornelia
+		name_dabhamoun name_dabhnoudy name_dabshay name_dabyam name_dakhom name_daloushem name_damiane name_dambro name_darow name_dasony name_dshenoudi name_dorar name_donna
+		name_djemmahor name_djitchoy name_dydjol
+		name_elizabeth name_ermydi name_esi name_eudoxia name_eunike name_euphrosyne 
+		name_fausta name_flavia
+		name_halet name_harmina name_hathor name_hoide name_houden name_hrere
+		name_irene
+		name_jasmine name_joanna name_josephine
+		name_klawbadra name_koulodje
+		name_leyla name_lobna name_loule
+		name_malika name_martha name_mary name_menryt
+		name_nawny name_nebtho name_neit name_noura
+		name_ourt
+		name_potamiana
+		name_rewekka name_rouya
+		name_sakhmy name_salome name_samiya name_sara name_sarbot name_selky name_sody name_sohair name_sophia name_susan name_synkletike name_simone
+		name_thafida name_thanoub name_theodora name_thwery
+		name_verena name_victoria name_veronica
+		name_wesy
+		name_ybadeya name_yoyt 
+		name_zahra name_zenobia name_zoe
+	}
+	dynasty_names = {
+		
+	}
+	lowborn = {
+		  
+	}
+	
+	dialects = {
+		behaeiry_dialect = {
+		   male_names = {
+		       name_abraham name_adrae name_aefonkh name_alexander name_amoun name_ananiel name_andrew name_anoup name_anthony name_arsenios name_athom name_awrelyon
+			   name_babhnoudy name_banikyros name_benjamin name_bakhom name_bane name_banehas name_banine name_baniran name_bashondy name_basil name_bdolemaios name_bemsah name_besady name_betebhre name_bhanisneoy name_bhanoub name_bhyb name_bidjimy name_bidjol name_bilihew name_birow name_bishoy name_bishennoufy name_bisthay name_boblyos name_bthah 
+			   name_christopher name_clemence
+			   name_daniel name_demetrius name_dydwe
+			   name_djimous name_djory
+			   name_aefonkh
+			   name_epifanio
+			   name_gabriel name_george
+			   name_haby name_harmine name_hercules name_herwodj name_horsiesy
+			   name_john name_joseph
+			   name_kelloudj name_kharakhde name_khnoum
+			   name_manethon name_mercurius 
+			   name_nawerho name_nefthem
+			   name_orygen name_ousire
+			   name_patermouthios name_paul name_peter name_philip name_phoebumoun name_phoebus name_poimen
+			   name_ramsis name_rweys
+			   name_sarathiel name_sedakiel name_set name_severus
+			   name_shenoudi name_soter name_souk name_souriel name_stephen
+			   name_thedmosy
+			   name_victor
+			   name_wadymon name_wenipi name_wenofer name_wershenoufi
+		   }
+		   female_names = {
+		       name_aidesia name_alexandra name_amawny name_arisone name_asenneth name_asofper
+			   name_berenice name_bernoufi name_bhoiwa
+			   name_dabhamoun name_dabhnoudy name_dabshay name_dabyam name_dakhom name_daloushem name_damiane name_dambro name_darow name_dasony
+			   name_djemmahor name_djitchoy name_dshenoudi name_dydjol
+			   name_elizabeth name_eudoxia name_eunike name_euphrosyne
+			   name_halet name_hoide name_houden name_hrere
+			   name_irene
+			   name_jasmine name_josephine
+			   name_klawbadra name_koulodje
+			   name_loule
+			   name_menryt
+			   name_nebtho
+			   name_potamiana
+			   name_rewekka
+			   name_salome name_sarbot name_selky name_sody name_susan name_synkletike
+			   name_verena name_victoria 
+			   name_ybadeya
+			   name_zoe
+		   }
+		   dynasty_names = {
+		
+	       }
+	       lowborn = {
+		         
+	       }
+		   
+		}
+		sahiydi_dialect = {
+		   male_names = {
+		       name_abraham name_adrae name_aefonkh name_alexander name_amoun name_ananiel name_andrew name_anoup name_anthony name_arsenios name_athom name_aurelius
+			   name_babhnoudy name_banikyros name_benjamin name_bakhom name_bane name_banehas name_banine name_baniran name_bashondy name_basil name_bdolemaios name_bemsah name_besady name_betebhre name_bhanisneoy name_bhanoub name_bhyb name_bidjimy name_bidjol name_bilihew name_birow name_bishoy name_bishennoufy name_bisthay name_boblyos name_bthah 
+			   name_christopher name_clemence
+			   name_daniel name_demetrius name_dydwe
+			   name_djimous name_djory
+			   name_aefonkh
+			   name_epifanio
+			   name_gabriel name_george
+			   name_haby name_harmine name_hercules name_herwodj name_horsiesy
+			   name_john name_joseph
+			   name_kelloudj name_kharakhde name_khnoum
+			   name_manethon name_mercurius
+			   name_nawerho name_nefthem
+			   name_orygen name_ousire
+			   name_patermouthios name_paul name_peter name_philip name_phoebumoun name_phoebus name_poimen
+			   name_ramsis name_rweys
+			   name_sarathiel name_sedakiel name_set name_severus
+			   name_shenoudi name_soter name_souk name_souriel name_stephen
+			   name_thedmosy
+			   name_victor
+			   name_wadymon name_wenipi name_wenofer name_wershenoufi
+		   }
+		   female_names = {
+		       name_aidesia name_alexandra name_amawny name_arisone name_asenneth name_asofper
+			   name_berenice name_bernoufi name_bhoiwa
+			   name_dabhamoun name_dabhnoudy name_dabshay name_dabyam name_dakhom name_daloushem name_damiane name_dambro name_darow name_dasony
+			   name_djemmahor name_djitchoy name_dshenoudi name_dydjol
+			   name_elizabeth name_eudoxia name_eunike name_euphrosyne
+			   name_halet name_hoide name_houden name_hrere
+			   name_irene
+			   name_jasmine name_josephine
+			   name_klawbadra name_koulodje
+			   name_loule
+			   name_menryt
+			   name_nebtho
+			   name_potamiana
+			   name_rewekka
+			   name_salome name_sarbot name_selky name_sody name_susan name_synkletike
+			   name_verena name_victoria 
+			   name_ybadeya
+			   name_zoe
+		   } 
+		   dynasty_names = {
+		      
+	       }
+	       lowborn = {
+		          
+	       }
+		}
+	}
+	
+	# to override the default adjective and noun database for cultural works
+	#adjective = {
+	#}
+	#noun = {
+	#}
+	patronym_prefix_son = "patronym_prefix_masry_son"
+	patronym_prefix_daughter = "patronym_prefix_masry_daughter"
+	location_prefix = "location_prefix_masry"
+	
+	
+}

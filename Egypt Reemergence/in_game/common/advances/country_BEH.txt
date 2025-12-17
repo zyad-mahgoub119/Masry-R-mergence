@@ -1,0 +1,127 @@
+#Age 1 Traditions#
+the_question_of_the_kanoun = {
+	age = age_1_traditions
+	potential = {
+		has_or_had_tag = BEH
+	}
+	unlock_government_reform = maersh_reform
+	requires = distribution_of_power_advance
+}
+
+masry_tradition = {
+	age = age_1_traditions
+	potential = {
+		has_or_had_tag = BEH
+	}
+	country_cabinet_efficiency = 0.08
+	legislative_efficiency = 0.1
+	head_of_cabinet_promotion_cost_modifier = -0.25
+	requires = cultural_traditions_law_advance
+}
+
+masry_heritage = {
+	age = age_1_traditions
+	potential = {
+		has_or_had_tag = BEH
+	}
+	cultural_influence_modifier = 0.25
+	cultural_tradition_modifier = 0.2
+	requires = cultural_traditions_law_advance
+}
+waryd = {
+	age = age_1_traditions
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = meritocracy_advance
+	global_distance_from_capital_cost_modifier = -0.05
+}
+##############################
+#Age 2 Renaissance#
+masry_renaissance = {
+	age = age_2_renaissance
+	icon = court_cost_advance_renai
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	research_speed_modifier = 0.05
+	num_possible_artists = 1
+	skill_of_new_artists = 0.05
+	global_max_literacy = 5
+	requires = art_school_advance
+}
+kashyf = {
+	age = age_2_renaissance
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = renaissance_thought
+	country_cabinet_efficiency = 0.1
+}
+red_sea_trade = {
+	age = age_2_renaissance
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = maritime_advance_age_2
+	trade_range_modifier = 0.33
+}
+##############################
+#Age 3 Renaissance#
+masters_of_the_nile = {
+	age = age_3_discovery
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = maritime_advance_age_3
+	global_monthly_prosperity = 0.001
+	global_monthly_food_modifier = 0.2
+}
+##############################
+#Age 4 Reformation#
+indian_networks = {
+	age = age_4_reformation 
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = global_trade_routes_advance
+	trade_efficiency = tiny_trade_efficiency_bonus
+	trade_sea_movement_cost_modifier = -0.1
+}
+##############################
+#Age 5 Renaissance#
+the_gunpowder_reformation = {
+	age = age_5_absolutism
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = army_movement_speed_absolutism
+	army_artillery_power = 0.05
+}
+port_customs = {
+	age = age_5_absolutism
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = artists_advance_absolutism
+	global_trade_protection_factor = 0.25
+}
+##############################
+#Age 6 Revolutions#
+secure_mediterranean_ports = {
+	age = age_6_revolutions
+	potential = {
+		has_or_had_tag = BEH
+	}
+
+	requires = superior_ship_design
+	global_maritime_presence_modifier = 0.25
+}

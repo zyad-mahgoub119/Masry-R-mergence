@@ -1,0 +1,27 @@
+alexandria_holy_city_tanwyr = {
+    location = alexandria
+    type = city
+    importance = 5
+	religions = {tanwyr }
+}
+
+cairo_holy_city_tanwyr = {
+    location = cairo
+    type = city
+    importance = 5
+	religions = {tanwyr }
+}
+
+menouf_holy_city_tanwyr = {
+    location = menouf
+    type = city
+    importance = 5
+	religions = {tanwyr }
+}
+
+saint_katrine_monastery_tanwyr = { #https://orthodoxwiki.org/St._Catherine%27s_Monastery_(Sinai)
+    location = saint_katrine
+    type = christian_holy_site
+    importance = 3
+	religions = { tanwyr }
+}

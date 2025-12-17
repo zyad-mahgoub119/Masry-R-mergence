@@ -1,0 +1,129 @@
+﻿#Barqa
+BQA = {
+	color = rgb { 111 130 111 }
+	color2 = rgb { 111 130 111 }
+	culture_definition = libyan_arabic_culture
+	religion_definition = sunni
+}
+
+#Banu Kanz
+BKZ = {
+	color = rgb { 211 130 211 }
+	color2 = rgb { 211 130 211 }
+	culture_definition = bedouin_culture
+	religion_definition = shia
+}
+
+#Fezzan - FZA (Stateless)
+FZA = {
+	color = map_fezzan
+	color2 = purple
+	culture_definition = toubou_culture
+	religion_definition = sunni
+}
+
+#Alæksandrya Amyria - ALX
+ALX = {
+	color = map_crusader_egypt
+	color2 = burned_red
+	culture_definition = behaeiry
+	religion_definition = miaphysite
+
+	description_category = administrative
+	difficulty = 3
+}
+
+#Sa'id Amyria - SAD
+SAD = {
+	color = map_mamluks
+	color2 = sun_yellow
+	culture_definition = behaeiry
+	religion_definition = miaphysite
+
+	description_category = administrative
+	difficulty = 3
+}
+
+#County of Wasæt - WST
+WST = {
+	color = rgb { 211 190 211 }
+	color2 = rgb { 211 190 211 }
+	culture_definition = sahiydi
+	religion_definition = miaphysite
+}
+
+#County of Klysma - KLY
+KLY = {
+	color = rgb { 211 170 211 }
+	color2 = rgb { 211 170 211 }
+	culture_definition = behaeiry
+	religion_definition = miaphysite
+}
+
+#Behæyra Amyria - BEH
+BEH = {
+	color = map_masry
+	color2 = dark_blue
+	culture_definition = behaeiry
+	religion_definition = tanwyr
+
+	description_category = administrative
+	difficulty = 3
+}
+
+#Wah ndæ Æmænt - WAT
+WAT = {
+	color = rgb { 131 18 48 }
+	color2 = rgb { 131 18 48 }
+	culture_definition = eastern_amazigh
+	religion_definition = miaphysite
+}
+
+#Suakin - SKN
+SKN = {
+	color = rgb { 211 230 111 }
+	color2 = rgb { 211 230 111 }
+	culture_definition = hijazi_culture
+	religion_definition = sunni
+}
+
+#Mīḏyān - MYD
+MYD = {
+    color = rgb { 47 111 33}
+	color2 = rgb { 47 111 33}
+	culture_definition = bedouin_culture
+	religion_definition = sunni
+}
+
+#Tripoli - TRP (Stateless)
+TRP = {
+	color = map_tripoli
+	color2 = blue_light
+	culture_definition = libyan_arabic_culture
+	religion_definition = sunni
+}
+
+#Lebnān - LEB
+LEB = {
+    color = rgb { 133 94 103 }
+	color2 = rgb { 133 94 103 }
+	culture_definition = syriac_culture
+	religion_definition = catholic
+}
+#Nusayria - NSY
+NSY = {
+    color = rgb { 119 200 246 }
+	color2 = rgb { 119 200 246 }
+	culture_definition = alawite_culture
+	religion_definition = shia
+}
+
+#Shaam - SHA
+SHA = {
+    color = rgb { 248 206 121 }
+	color2 = rgb { 248 206 121 }
+	culture_definition = levantine_culture
+	religion_definition = sunni
+}
+
+    

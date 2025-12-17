@@ -1,0 +1,73 @@
+aspect_of_first_consciousness = {
+    religion = tanwyr
+
+    enabled = {
+        NOT = {
+            has_religious_aspect = aspect_of_divine_reconciliation
+        }
+    }
+
+    # Modifiers focused on innovation, literacy, research, and justified conflict/rebellion
+    modifier = {
+        global_max_literacy = 15               # Enhanced from 'translated_bibles' - Emphasis on Gnosis/Enlightenment
+        research_speed_modifier = 0.10         # Enhanced from 'instituionalized_arminianism' - Pursuit of Reason/Philosophy
+        stability_cost = -0.10                 # Rebellions/Revolutions can be justified for greater purpose
+        antagonism_received_modifier = -0.1
+		global_war_score_cost = -0.05        # From 'justified_conflicts' - For 'Justified War and Conflict'
+        monthly_rebel_growth = -0.001          # Rebellions are often *your* rebellions, not against you (from 'individual_creeds')
+        monthly_towards_innovative = societal_value_monthly_move # Represents 'Freedom, Reason, Enlightenment'
+        monthly_towards_belligerent = societal_value_monthly_move # Represents 'Revolutionaries, Rebellion, Justified War'
+        clergy_estate_target_satisfaction = small_permanent_target_satisfaction_penalty # New ideas often challenge the old order
+    }
+
+    # You will have a negative opinion of those who chose the path of Reconciliation over pure Consciousness
+    opinions = {
+        aspect_of_first_consciousness = 10
+        aspect_of_divine_reconciliation = -20 # The opposing aspect name will be defined below
+    }
+}
+
+aspect_of_divine_reconciliation = {
+    religion = tanwyr
+
+    # This aspect cannot be chosen if you already have 'aspect_of_first_consciousness'
+    enabled = {
+        NOT = {
+            has_religious_aspect = aspect_of_first_consciousness
+        }
+    }
+
+    # Modifiers focused on stability, unity, conversion, and social cohesion
+    modifier = {
+        stability_cost = -0.15                 # From 'adoptionism' - Focus on restoring unity and order
+        tolerance_own = 1                      # From 'aniconism' - Harmonious society
+        global_pop_conversion_speed_modifier = 0.10 # From 'adult_baptism' - Bringing people into the unified faith
+        pop_join_rebel_threshold = -0.03       # From 'sola_fide' - Reducing internal dissent
+        monthly_towards_communalism = societal_value_monthly_move # Focus on social harmony and tradition
+        monthly_towards_conciliatory = societal_value_monthly_move # Peace and diplomatic solutions
+    }
+
+    # You will have a negative opinion of those who chose the path of First Consciousness
+    opinions = {
+        aspect_of_divine_reconciliation = 10
+        aspect_of_first_consciousness = -20
+    }
+}
+
+aspect_solar_liturgy = {
+    religion = tanwyr
+
+    # Modifiers focused on culture, morale, and the new art style
+    modifier = {
+	    num_possible_artists = 1
+        skill_of_new_artists = 0.1             # From 'soli_deo_gloria' (new art)
+        global_monthly_art_start_chance = 0.1  # From 'soli_deo_gloria'
+        monthly_religious_influence = 0.1
+		land_morale_recovery = 0.02            # From 'war_sermons' (armies inspired by the "Sun")
+        monthly_towards_spiritualist = societal_value_monthly_move
+    }
+
+    opinions = {
+        aspect_solar_liturgy = 10
+    }
+}

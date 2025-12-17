@@ -1,0 +1,2636 @@
+﻿namespace = flavor_BEH
+
+flavor_BEH.1 = {
+	hide_portraits = yes
+	type = country_event
+	title = flavor_BEH.1.title
+	desc = flavor_BEH.1.desc
+	image = "gfx/interface/illustrations/situation/rise_of_the_ottomans.dds"
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1500.1.1
+		monthly_chance = 50
+	}
+
+
+	trigger = {
+		NOR = {
+			is_rival_of = c:TUR
+			is_enemy_of = c:TUR
+		}
+		c:TUR = {
+			owns = location:constantinople
+		}
+	}
+
+	immediate = {
+		ruler_or_regent ?= { save_scope_as = target_character }
+		c:TUR = { ruler_or_regent ?= { save_scope_as = target_character2 } }
+	}
+
+	option = {
+		name = flavor_BEH.1.a
+		c:TUR = {
+			 add_opinion = { target = root modifier = BEH_poem_recieved }
+		}
+	}
+	option = {
+		name = flavor_BEH.1.b
+		add_stability = stability_mild_bonus
+	}
+}
+
+
+flavor_BEH.2 = {
+	type = country_event
+	title = flavor_BEH.2.title
+	desc = flavor_BEH.2.desc
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1457.1.1
+		to = 1458.1.1
+		monthly_chance = 50
+	}
+
+
+	trigger = {
+		owns = location:cairo
+	}
+
+	option = {
+		name = flavor_BEH.2.a
+		location:cairo = {
+			change_development = development_mild_bonus
+		}
+	}
+}
+
+flavor_BEH.3 = {
+	type = country_event
+	title = flavor_BEH.3.title
+	desc = flavor_BEH.3.desc
+	image = "gfx/interface/illustrations/government/throne_rooms/throne_room_syrian.dds"
+
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1458.1.1
+		to = 1470.1.1
+		monthly_chance = 5
+	}
+
+	trigger = {
+		at_war = no
+		country_exists = c:CYP
+
+		c:CYP = {
+			is_subject = no
+			at_war = no
+			religion.group = religion_group:christian
+			own_entire_province = province_definition:cyprus_province
+			government_type = government_type:monarchy
+			OR = {
+				ruler ?= { is_female = yes }
+				has_regent = yes
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.3.a
+		historical_option = yes
+		c:CYP = {
+			trigger_event_silently = { id = flavor_BEH.4 }
+		}
+		add_prestige = prestige_mild_penalty
+	}
+	option = {
+		name = flavor_BEH.3.b
+		add_prestige = prestige_mild_bonus
+	}
+}
+
+flavor_BEH.4 = {
+	type = country_event
+	title = flavor_BEH.4.title
+	desc = flavor_BEH.4.desc
+	image = "gfx/interface/illustrations/government/throne_rooms/throne_room_syrian.dds"
+
+
+	immediate = {
+
+		create_character = {
+			first_name = name_james
+			dynasty = dynasty:lusignan_dynasty
+			adm = 65
+			dip = 70
+			mil = 68
+
+			save_scope_as = target_character
+		}
+
+	}
+
+	option = {
+		name = flavor_BEH.4.a
+		historical_option = yes
+		c:BEH = {
+			trigger_event_silently = { id = flavor_BEH.5 }
+		}
+		add_prestige = prestige_mild_penalty
+
+		set_new_ruler = scope:target_character
+	}
+	option = {
+		name = flavor_BEH.4.b
+		change_gold_effect = { scale = -12 }
+		c:BEH = {
+			trigger_event_silently = { id = flavor_BEH.6 }
+		}
+	}
+	option = {
+		name = flavor_BEH.4.c
+		add_prestige = prestige_mild_penalty
+		c:BEH = {
+			trigger_event_silently = { id = flavor_BEH.7 }
+			add_opinion = { target = root modifier = BEH_refused_james }
+		}
+	}
+}
+
+flavor_BEH.5 = {
+	type = country_event
+	title = flavor_BEH.5.title
+	desc = flavor_BEH.5.desc
+
+	illustration_tags = {
+ 		10 = happy
+ 		10 = interior
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:nobles_estate background = estate_type:nobles_estate }
+	}
+
+	option = {
+		name = flavor_BEH.5.a
+		c:CYP = {
+			add_opinion = { target = root modifier = BEH_installed_ruler }
+			make_subject_of = {  target = c:BEH type = subject_type:vassal }
+		}
+		add_prestige = prestige_extreme_bonus
+	}
+}
+
+flavor_BEH.6 = { 
+	type = country_event
+	title = flavor_BEH.6.title
+	desc = flavor_BEH.6.desc
+
+	illustration_tags = {
+		10 = regular
+		10 = exterior
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:nobles_estate background = estate_type:burghers_estate }
+	}
+
+	option = {
+		name = flavor_BEH.6.a
+		change_gold_effect = { scale = 3 }
+		add_prestige = prestige_weak_bonus
+	}
+}
+
+flavor_BEH.7 = {
+	type = country_event
+	title = flavor_BEH.7.title
+	desc = flavor_BEH.7.desc
+
+	illustration_tags = {
+		10 = angry
+		10 = interior
+	}
+	
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:nobles_estate background = estate_type:nobles_estate }
+	}
+
+	option = {
+		name = flavor_BEH.7.a
+		add_casus_belli =  { type = casus_belli:cb_conquer_province target = c:CYP province = location:nicosia_cyp.province }
+	}
+}
+
+flavor_BEH.8 = {
+	type = country_event
+	title = flavor_BEH.8.title
+	desc = flavor_BEH.8.desc
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1440.1.1
+		to = 1470.1.1
+		monthly_chance = 2
+	}
+
+	illustration_tags = {
+		10 = regular
+		10 = interior
+	}
+
+	immediate = {
+		create_character = {
+			first_name = name_rweys
+			last_name = name_mahgoub
+			adm = {50 80}
+			dip = {50 80}
+			mil = {50 80}
+			birth_date = 1411.2.2
+			birth_location = location:cairo
+			artist_skill = 0.95
+			artist = writer
+			estate = estate_type:burghers_estate
+			save_scope_as = target_artist
+			create_in_limbo = yes
+		}
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:nobles_estate }
+
+	}
+
+	option = {
+		name = flavor_BEH.8.a
+		historical_option = yes
+
+		scope:target_artist = { move_country = root }
+		location:cairo = {
+			create_art = {
+				artist = scope:target_artist
+				quality = 100
+				type = work_of_art_type:chronicle
+				key = chronicle_of_egypt
+			}
+		}
+		change_gold_effect = { scale = -2 }
+	}
+	option = {
+		name = flavor_BEH.8.b
+		add_prestige = prestige_mild_penalty
+		scope:target_artist = { banish_character = yes }
+	}
+}
+
+flavor_BEH.11 = {
+	type = country_event
+	title = flavor_BEH.11.title
+	desc = flavor_BEH.11.desc
+
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1450.1.1
+		to = 1500.1.1
+		monthly_chance = 2
+	}
+
+	illustration_tags = {
+		10 = happy
+		10 = interior
+	}
+
+	trigger = {
+		country_exists = c:TUR
+		c:TUR.expected_army_size > expected_army_size
+		c:TUR = {
+			owns = location:constantinople
+		}
+		any_known_country = {
+			religion.group = religion_group:christian
+			country_rank_level >= 3
+			capital = {
+				OR = {
+					region = region:iberia_region
+					region = region:italy_region
+				}
+			}
+		}
+	}
+
+	immediate = {
+		event_illustration_government_estate_effect = yes
+	}
+
+	option = {
+		name = flavor_BEH.11.a
+
+		ordered_known_country = {
+			limit = {
+				religion.group = religion_group:christian
+				country_rank_level >= 3
+				capital = {
+				OR = {
+					region = region:iberia_region
+					region = region:italy_region
+				}
+			}
+			}
+			order_by = expected_army_size
+			max = 3
+			add_opinion = { target = root modifier = BEH_anti_ottoman_friends }
+			trigger_event_silently = { id = flavor_BEH.12 }
+		}
+	}
+}
+
+flavor_BEH.12 = {
+	type = country_event
+	title = flavor_BEH.12.title
+	desc = flavor_BEH.12.desc
+
+	illustration_tags = {
+		10 = happy
+		10 = interior
+	}
+
+	immediate = {
+		event_illustration_government_estate_effect = yes
+	}
+
+	option = {
+		name = flavor_BEH.12.a
+		c:BEH = {
+			add_opinion = { target = root modifier = BEH_anti_ottoman_friends }
+		}
+	}
+}
+
+flavor_BEH.15 = {
+	type = country_event
+	title = flavor_BEH.15.title
+	desc = flavor_BEH.15.desc
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1400.1.1
+		to = 1600.1.1
+		monthly_chance = 2
+	}
+
+	illustration_tags = {
+		10 = angry
+		10 = exterior
+	}
+
+	trigger = {
+		owns = location:suez
+		owns = location:alexandria
+		c:POR ?= {
+			any_market_with_merchants = {
+				location = {
+					OR = {
+						region = region:somalia_region
+						area = area:north_yemen_area
+						area = area:south_yemen_area
+					}
+				}
+			}
+		}
+		country_exists = c:POR
+		manpower_percentage >= 0.50
+	}
+	immediate = {
+		c:POR ?= {
+			random_market_with_merchants = {
+				limit = {
+					location = {
+						OR = {
+							region = region:somalia_region
+							area = area:north_yemen_area
+							area = area:south_yemen_area
+						}
+					}
+				}
+				save_scope_as = target_market
+			}
+		}
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:burghers_estate }
+	}
+
+	option = {
+		name = flavor_BEH.15.a
+		historical_option = yes
+		set_variable = BEH_POR_conflict
+		c:POR = {
+			add_opinion = { target = root modifier = BEH_por_confronted }
+			trigger_event_silently = { id = flavor_BEH.16 }
+		}
+	}
+	option = {
+		name = flavor_BEH.15.b
+		add_prestige = prestige_mild_penalty
+		scope:target_market = {
+			add_merchant_power = {
+				country = root
+				key = surrender_the_trade
+				months = 120
+				power = -20
+			}
+		}
+	}
+}
+
+flavor_BEH.16 = {
+	type = country_event
+	title = flavor_BEH.16.title
+	desc = flavor_BEH.16.desc
+
+	illustration_tags = {
+		10 = regular
+		10 = interior
+	}
+
+	immediate = {
+		event_illustration_poptype_effect = { foreground = pop_type:soldiers background = pop_type:soldiers }
+	}
+
+	option = {
+		name = flavor_BEH.16.a
+		add_casus_belli = {	target = c:BEH	type = casus_belli:cb_trade_war_triggered	}
+	}
+}
+
+
+flavor_BEH.23 = {
+	type = country_event
+	title = flavor_BEH.23.title
+	desc = flavor_BEH.23.desc
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1330.1.1
+		to = 1400.1.1
+		monthly_chance = 2
+	}
+
+	illustration_tags = {
+		10 = exterior
+		10 = happy
+	}
+
+	trigger = {
+		at_war = no
+		is_during_bankruptcy = no
+		location:cairo = {
+			owner = root
+			has_building = building_type:nilometer_marsad
+		}
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:clergy_estate background = estate_type:clergy_estate }
+		location:cairo = {
+			save_scope_as = target_location
+		}
+		ruler_or_regent ?= { save_scope_as = target_character }
+	}
+
+	option = {
+		name = flavor_BEH.23.a
+
+		change_societal_value = { type = mysticism_vs_jurisprudence value = societal_value_tiny_move_to_right }
+		add_research_progress = research_progress_mild_bonus
+	}
+}
+
+flavor_BEH.26 = {
+	hide_portraits = yes
+	type = country_event
+	title = flavor_BEH.26.title
+	desc = flavor_BEH.26.desc
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1330.1.1
+		to = 1400.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = exterior
+		10 = happy
+	}
+
+	trigger = {
+		at_war = no
+		is_during_bankruptcy = no
+		location:cairo = {
+			owner = root
+			total_building_levels >= 35
+		}
+	}
+
+	immediate = {
+		set_variable = enable_ablaq_palace_variable
+		ruler_or_regent ?= { save_scope_as = target_character }
+		location:cairo = { save_scope_as = target_location }
+		event_illustration_estate_effect = { foreground = estate_type:nobles_estate background = estate_type:burghers_estate }
+	}
+
+	option = {
+		name = flavor_BEH.26.a
+
+		change_gold_effect = { scale = -2 }
+		location:cairo = {
+			change_prosperity = prosperity_extreme_bonus
+			construct_building = {
+				building_type = building_type:remyse_palace
+			}
+		}
+		add_government_power = government_power_severe_bonus
+	}
+
+	option = {
+		name = flavor_BEH.26.b
+
+		add_government_power = government_power_severe_penalty
+	}
+}
+
+flavor_BEH.29 = { #Mamluk Administration - The Offices of the Court
+	hide_portraits = yes
+	type = country_event
+	title = flavor_BEH.29.title
+	desc = flavor_BEH.29.desc
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1337.1.1
+		to = 1395.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = interior
+		10 = regular
+	}
+
+	trigger = {
+		at_war = no
+		is_during_bankruptcy = no
+		any_cabinet_character = {
+			count > 2
+		}
+		capital = {
+			has_building = building_type:chancery
+		}
+	}
+
+	immediate = {
+		ruler_or_regent ?= { save_scope_as = target_character99 }
+		ordered_cabinet_character = {
+			order_by = total_abilities
+			max = 1
+			check_range_bounds = no
+			save_scope_as = target_character1
+		}
+		ordered_cabinet_character = {
+			order_by = total_abilities
+			limit = {
+				this != scope:target_character1
+			}
+			max = 1
+			check_range_bounds = no
+			save_scope_as = target_character2
+		}
+		ordered_cabinet_character = {
+			order_by = total_abilities
+			limit = {
+				this != scope:target_character1
+				this != scope:target_character2
+			}
+			max = 1
+			check_range_bounds = no
+			save_scope_as = target_character3
+		}
+		set_variable = {
+			name = adm_cabinet_skills_variable
+			value = {
+				add = scope:target_character1.adm
+				add = scope:target_character2.adm
+				add = scope:target_character3.adm
+				divide = 10
+			}
+		}
+		set_variable = {
+			name = dip_cabinet_skills_variable
+			value = {
+				add = scope:target_character1.dip
+				add = scope:target_character2.dip
+				add = scope:target_character3.dip
+				divide = 10
+			}
+		}
+		set_variable = {
+			name = mil_cabinet_skills_variable
+			value = {
+				add = scope:target_character1.mil
+				add = scope:target_character2.mil
+				add = scope:target_character3.mil
+				divide = 10
+			}
+		}
+		ordered_cabinet_character = {
+			order_by = adm
+			position = 1
+			check_range_bounds = no
+			save_scope_as = target_character4
+		}
+		ordered_cabinet_character = {
+			order_by = dip
+			limit = {
+				this != scope:target_character4
+			}
+			position = 1
+			check_range_bounds = no
+			save_scope_as = target_character5
+		}
+		ordered_cabinet_character = {
+			order_by = mil
+			limit = {
+				this != scope:target_character4
+				this != scope:target_character5
+			}
+			position = 1
+			check_range_bounds = no
+			save_scope_as = target_character6
+		}
+		event_illustration_estate_effect = { foreground = estate_type:clergy_estate background = estate_type:nobles_estate }
+	}
+
+	option = {
+		name = flavor_BEH.29.a
+
+		scope:target_character4 = {
+			add_character_modifier = {
+				modifier = elevated_official_modifier
+				years = -1
+				mode = add_and_extend
+			}
+			add_adm = 5
+			if = {
+				limit = {
+					has_estate = estate_type:nobles_estate
+					is_heir = no
+					is_female = no
+				}
+			}
+		}
+		custom_tooltip = based_on_average_adm_cabinet_character_total_abilities_tt
+		add_research_progress = {
+			value = root.var:adm_cabinet_skills_variable
+			divide = 3
+			round = yes
+		}
+		
+		
+		add_gold = {
+			value = root.monthly_income_trade_and_tax
+			multiply = -4
+
+			multiply = {
+				value = var:adm_cabinet_skills_variable
+				divide = 12
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.29.b
+
+		scope:target_character5 = {
+			add_character_modifier = {
+				modifier = elevated_official_modifier
+				years = -1
+				mode = add_and_extend
+			}
+			if = {
+				limit = {
+					has_estate = estate_type:nobles_estate
+					is_heir = no
+					is_female = no
+				}
+			}
+			add_dip = 5
+		}
+		custom_tooltip = based_on_average_dip_cabinet_character_total_abilities_tt
+		culture = {
+			add_cultural_tradition = {
+				value = root.var:dip_cabinet_skills_variable
+				round = yes
+			}
+		}
+		
+		add_gold = {
+			value = monthly_income_trade_and_tax
+			multiply = -4
+			multiply = {
+				value = var:dip_cabinet_skills_variable
+				divide = 12
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.29.c
+
+		scope:target_character6 = {
+			add_character_modifier = {
+				modifier = elevated_official_modifier
+				years = -1
+				mode = add_and_extend
+			}
+			if = {
+				limit = {
+					has_estate = estate_type:nobles_estate
+					is_heir = no
+					is_female = no
+				}
+			}
+			add_mil = 5
+		}
+		custom_tooltip = based_on_average_mil_cabinet_character_total_abilities_tt
+		add_army_tradition = {
+			value = root.var:mil_cabinet_skills_variable
+			round = yes
+		}
+		add_gold = {
+			value = monthly_income_trade_and_tax
+			multiply = -4
+			multiply = {
+				value = var:mil_cabinet_skills_variable
+				divide = 12
+			}
+		}
+	}
+
+	after = {
+		remove_variable = adm_cabinet_skills_variable
+		remove_variable = dip_cabinet_skills_variable
+		remove_variable = mil_cabinet_skills_variable
+	}
+}
+
+#Refining the Færousya
+flavor_BEH.32 = {
+	type = country_event
+	title = flavor_BEH.32.title
+	desc = flavor_BEH.32.desc
+	image = "gfx/interface/illustrations/units/army_cavalry_4_middle_east_gfx.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1500.1.1
+		monthly_chance = 10
+	}
+
+	trigger = {
+		army_tradition >= 50
+		is_during_bankruptcy = no
+		at_war = no
+	}
+	
+	immediate = {
+		create_character = {
+			first_name = name_marwan
+			last_name = name_mahgoub
+			adm = {50 80}
+			dip = {50 80}
+			mil = {50 80}
+			birth_date = random
+			birth_location = location:giza
+			artist_skill = 0.91
+			artist = writer
+			estate = estate_type:nobles_estate
+			save_scope_as = target_artist
+			create_in_limbo = yes
+		}
+		event_illustration_estate_effect = { foreground = estate_type:nobles_estate background = estate_type:nobles_estate }
+
+	}
+
+	option = {
+		name = flavor_BEH.32.a
+		change_gold_effect = { scale = -6 }
+		add_army_tradition = army_tradition_mild_bonus
+		unlock_estate_privilege_effect = { type = BEH_refined_ferousya }
+		grant_estate_privilege = estate_privilege:BEH_refined_ferousya
+		scope:target_artist = { move_country = root }
+		location:cairo = {
+			create_art = {
+				artist = scope:target_artist
+				quality = 83
+				type = work_of_art_type:treatise 
+				key = refined_ferousya
+			}
+		}
+		change_gold_effect = { scale = -2 }
+		
+	}
+
+	option = {
+		name = flavor_BEH.32.b
+		add_army_tradition = army_tradition_mild_penalty
+	}
+}
+
+#Arrival of Ibn Khaldun
+flavor_BEH.33 = {
+	type = country_event
+	title = flavor_BEH.33.title
+	desc = flavor_BEH.33.desc
+
+	fire_only_once = yes
+
+	historical_info = flavor_BEH.33.historical_info
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1382.1.1
+		to = 1406.1.1
+		monthly_chance = 5
+	}
+	image = "gfx/interface/illustrations/government/throne_rooms/throne_room_syrian.dds"
+
+	trigger = {
+		is_during_bankruptcy = no
+		owns = location:cairo
+		character:ibn_khaldun_script ?= {
+			is_alive = yes
+			owner != root
+		}
+	}
+
+	immediate = {
+		character:ibn_khaldun_script = {
+			owner ?= { save_scope_as = target_country }
+			save_scope_as = target_character
+		}
+		save_scope_as = target_country_2
+	}
+
+	option = {
+		name = flavor_BEH.33.a
+		historical_option = yes
+		change_gold_effect = { scale = -3 }
+		scope:target_country ?= { trigger_event_non_silently = flavor_BEH.63 }
+		scope:target_character = { move_country = root }
+
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_right
+		}
+	}
+
+	option = {
+		name = flavor_BEH.33.b
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_left
+		}
+	}
+}
+
+flavor_BEH.34 = { #Ibn Khaldun's Family Tragedy  #GRAVEYARD
+	type = country_event
+	title = flavor_BEH.34.title
+	desc = flavor_BEH.34.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1370.1.1
+		to = 1390.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = regular
+		10 = interior
+	}
+
+	trigger = {
+		character:ibn_khaldun_script ?= {
+			is_alive = yes
+			owner = root
+		}
+		owns = location:alexandria
+		owns = location:cairo
+		country_exists = c:TUN
+	}
+
+	immediate = {
+		character:ibn_khaldun_script ?= { save_scope_as = khaldun }
+		event_illustration_estate_effect = { foreground = estate_type:clergy_estate background = estate_type:clergy_estate }
+	}
+
+	option = {
+		name = flavor_BEH.34.a
+		historical_option = yes
+		scope:khaldun = {
+			add_character_modifier = { modifier = ibn_khaldun_mourning days = 30 mode = add_and_extend }
+		}
+	}
+
+	option = {
+		name = flavor_BEH.34.b
+		add_prestige = prestige_weak_penalty
+	}
+}
+
+flavor_BEH.35 = { #Ibn Khaldun Requests Funding
+	type = country_event
+	title = flavor_BEH.35.title
+	desc = flavor_BEH.35.desc
+
+	fire_only_once = yes
+
+	illustration_tags = {
+		10 = regular
+		10 = exterior
+	}
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1370.1.1
+		to = 1390.1.1
+		monthly_chance = 1
+	}
+
+	immediate = {
+		character:ibn_khaldun_script ?= { save_scope_as = khaldun }
+		ruler = {
+			save_scope_as = target_ruler
+		}
+		event_illustration_government_estate_effect = yes
+	}
+
+	trigger = {
+		has_ruler = yes
+		character:ibn_khaldun_script ?= {
+			is_alive = yes
+		}
+	}
+
+	option = {
+		name = flavor_BEH.35.a
+		change_gold_effect = { scale = -3 }
+		set_variable = ibn_khaldun_work_of_art
+	}
+
+	option = {
+		name = flavor_BEH.35.b
+		add_prestige = prestige_weak_penalty
+	}
+}
+
+flavor_BEH.36 = { #Ibn Khaldun Finishes the Kitāb al-ʻIbar
+	type = country_event
+	title = flavor_BEH.36.title
+	desc = flavor_BEH.36.desc
+
+	fire_only_once = yes
+
+	historical_info = flavor_BEH.36.historical_info
+
+	illustration_tags = {
+		10 = happy
+		10 = exterior
+	}
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1380.1.1
+		to = 1390.1.1
+		monthly_chance = 20
+	}
+
+	immediate = {
+		character:ibn_khaldun_script ?= { save_scope_as = khaldun }
+		event_illustration_government_estate_effect = yes
+	}
+
+	trigger = {
+		character:ibn_khaldun_script ?= {
+			is_alive = yes
+		}
+		has_variable = ibn_khaldun_work_of_art
+		owns = location:cairo
+	}
+
+	option = {
+		name = flavor_BEH.36.a
+		historical_option = yes
+		add_prestige = prestige_mild_bonus
+		scope:khaldun = {
+			add_artist_skill = 0.1
+		}
+		location:cairo = {
+			create_art = {
+				quality = 80
+				artist = scope:khaldun
+				type = work_of_art_type:chronicle
+				key = kitab_al_ibar
+			}
+		}
+	}
+
+	after = {
+		remove_variable = ibn_khaldun_work_of_art
+	}
+}
+
+flavor_BEH.37 = { #al-Maqrizi
+	type = country_event
+	title = flavor_BEH.37.title
+	desc = flavor_BEH.37.desc
+
+	fire_only_once = yes
+
+	illustration_tags = {
+		10 = happy
+		10 = interior
+	}
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1400.1.1
+		to = 1410.1.1
+		monthly_chance = 10
+	}
+
+	trigger = {
+		character:ibn_khaldun_script ?= {
+			is_alive = yes
+			owner = root
+		}
+	}
+
+	immediate = {
+		create_character = {
+			estate = estate_type:clergy_estate
+			first_name = name_taqi
+			last_name = al_Maqrizi
+			birth_date = 1364.8.3
+			birth_location = location:cairo
+			artist = writer
+			artist_skill = 0.85
+			adm = { 50 80 }
+			dip = { 50 80 }
+			mil = { 20 30 }
+			script = al_maqrizi_script
+			save_scope_as = target_character
+			create_in_limbo = yes
+		}
+		character:ibn_khaldun_script = {
+			save_scope_as = khaldun
+		}
+		event_illustration_government_estate_effect = yes
+	}
+
+	option = {
+		name = flavor_BEH.37.a
+		scope:target_character = {
+			move_country = root
+		}
+		add_research_progress = research_progress_mild_bonus
+	}
+}
+
+flavor_BEH.38 = { #Bedouin Warfare Disrupts Trade
+	type = country_event
+	title = flavor_BEH.38.title
+	desc = flavor_BEH.38.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1350.1.1
+		to = 1400.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = angry
+		10 = interior
+}
+
+	trigger = {
+		"culture_percentage_in_country(culture:bedouin_culture)" > 0
+		culture != culture:bedouin_culture
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:burghers_estate }
+	}
+
+	option = {
+		name = flavor_BEH.38.a
+		change_gold_effect = { scale = -4 }
+		custom_tooltip = {
+			text = flavor_BEH.38.a.tt
+			every_owned_location = {
+				every_pop = {
+					limit = {
+						owner = root
+						culture = culture:bedouin_culture
+					}
+					add_pop_satisfaction = pop_satisfaction_ultimate_penalty
+				}
+			}
+		}
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_mild_bonus }
+		add_country_modifier = {
+			modifier = BEH_bedoin_warfare
+			years = 10
+			mode = add_and_extend
+		}
+	}
+
+	option = {
+		name = flavor_BEH.38.b
+		add_stability = stability_extreme_penalty
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_extreme_penalty }
+		add_country_modifier = {
+			modifier = BEH_bedoin_warfare_severe
+			years = 10
+			mode = add_and_extend
+		}
+	}
+
+	after = {
+		set_variable = BEH_relocate_bedouins
+	}
+}
+
+flavor_BEH.39 = { #Relocating the Bedouins
+	type = country_event
+	title = flavor_BEH.39.title
+	desc = flavor_BEH.39.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1380.1.1
+		to = 1450.1.1
+		monthly_chance = 1
+	}
+
+	trigger = {
+		has_variable = BEH_relocate_bedouins
+		own_entire_area = area:sinai_area
+		"culture_percentage_in_country(culture:bedouin_culture)" > 0
+		culture != culture:bedouin_culture
+		area:sinai_area = {
+			any_location_in_area = {
+				dominant_culture = culture:bedouin_culture
+			}
+		}
+		own_entire_province = province_definition:qusiyya_province
+		own_entire_province = province_definition:asyut_province
+	}
+
+	immediate = {
+		area:sinai_area = {
+			ordered_location_in_area = {
+				limit = {
+					dominant_culture = culture:bedouin_culture
+				}
+				order_by = population
+				max = 1
+				save_scope_as = source_location
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.39.a
+		historical_option = yes
+		culture:bedouin_culture = {
+			change_cultural_view = {
+				target = root.culture
+				change = -1
+			}
+		}
+		add_migration = {
+			owner = this
+			from = scope:source_location.province_definition
+			to = province_definition:qusiyya_province
+			culture = culture:bedouin_culture
+			amount = 0.1
+			months = 120
+		}
+
+		add_migration = {
+			owner = this
+			from = scope:source_location.province_definition
+			to = province_definition:asyut_province
+			culture = culture:bedouin_culture
+			amount = 0.1
+			months = 120
+		}
+	}
+
+	option = {
+		name = flavor_BEH.39.b
+		add_prestige = prestige_mild_penalty
+	}
+
+	after = {
+		remove_variable = BEH_relocate_bedouins
+	}
+}
+
+flavor_BEH.40 = { #The Pride of Alexandria
+	type = country_event
+	title = flavor_BEH.40.title
+	desc = flavor_BEH.40.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1380.1.1
+		to = 1800.1.1
+		monthly_chance = 1
+	}
+
+	trigger = {
+		owns = location:alexandria
+	}
+
+	immediate = {
+			location:alexandria = {
+			save_scope_as = target_location
+		}
+	}
+
+	option = {
+		name = flavor_BEH.40.a
+		add_prestige = prestige_mild_bonus
+		location:alexandria = {
+			construct_building = {
+				building_type = building_type:lighthouse_of_alexandria
+			}
+			change_prosperity = prosperity_severe_bonus
+		}
+	}
+
+	option = {
+		name = flavor_BEH.40.b
+		add_prestige = prestige_mild_penalty
+	}
+}
+
+flavor_BEH.42 = { #Conquest of Cyprus
+	type = country_event
+	title = flavor_BEH.42.title
+	desc = flavor_BEH.42.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1337.1.1
+		to = 1836.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = happy
+		10 = interior
+	}
+
+	trigger = {
+		own_entire_province = province_definition:cyprus_province
+		NOT = {
+			country_exists = c:CYP
+		}
+	}
+
+	immediate = {
+		event_illustration_government_estate_effect = yes
+	}
+
+	option = {
+		name = flavor_BEH.42.a
+		historical_option = yes
+		custom_tooltip = {
+			text = flavor_BEH.42.a.tt
+			province_definition:cyprus_province = {
+				every_location_in_province_definition = {
+					remove_core = root
+					add_core = c:CYP
+				}
+			}
+			create_country_from_cores_in_our_locations = c:CYP
+			c:CYP = {
+				make_subject_of = { target = root type = subject_type:vassal }
+				change_religion = religion:catholic
+				change_religion_for_ruler_and_family = { country = c:CYP religion = religion:catholic }
+				change_country_color = map_cyprus
+				change_government_type = government_type:monarchy
+				add_all_estate_satisfaction = { value = estate_satisfaction_ultimate_bonus }
+				change_government_type = government_type:monarchy
+				every_owned_location = {
+					change_control = control_ultimate_bonus
+				}
+				every_province = {
+					limit = { any_location_in_province = { NOT = { integration_level = core } } }
+					change_province_integration = core
+				}
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.42.b
+		province_definition:cyprus_province = {
+			every_location_in_province_definition = {
+				change_control = control_mild_bonus
+			}
+		}
+	}
+}
+
+flavor_BEH.45 = { #Flooding of the Nile #DEVASTATION?
+	type = country_event
+	title = flavor_BEH.45.title
+	desc = flavor_BEH.45.desc
+
+	trigger = {
+		tag = BEH
+		own_entire_province = province_definition:sharqiyya_province
+		own_entire_province = province_definition:gharbiyya_province
+		own_entire_province = province_definition:buhayra_province
+		NOT = {
+			has_variable = BEH_had_nile_flood
+		}
+	}
+
+	immediate = {
+		set_variable = { name = BEH_had_nile_flood days = 18250 }
+		province_definition:sharqiyya_province = {
+			random_location_in_province_definition = {
+				save_scope_as = target_location
+			}
+		}
+		province_definition:gharbiyya_province = {
+			random_location_in_province_definition = {
+				save_scope_as = target_location_two
+			}
+		}
+		province_definition:buhayra_province = {
+			random_location_in_province_definition = {
+				save_scope_as = target_location_three
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.45.a
+		change_gold_effect = { scale = -8 }
+		scope:target_location = {
+			change_prosperity = prosperity_severe_penalty
+		}
+		scope:target_location_two = {
+			change_prosperity = prosperity_severe_penalty
+		}
+		scope:target_location_three = {
+			change_prosperity = prosperity_severe_penalty
+		}
+	}
+
+	option = {
+		name = flavor_BEH.45.b
+		scope:target_location = {
+			change_prosperity = prosperity_radical_penalty
+			every_pop = {
+				add_pop_size = {
+					value = pop_size
+					multiply = -0.1
+				}
+			}
+		}
+		scope:target_location_two = {
+			change_prosperity = prosperity_radical_penalty
+			every_pop = {
+				add_pop_size = {
+					value = pop_size
+					multiply = -0.1
+				}
+			}
+		}
+		scope:target_location_three = {
+			change_prosperity = prosperity_radical_penalty
+			every_pop = {
+				add_pop_size = {
+					value = pop_size
+					multiply = -0.1
+				}
+			}
+		}
+	}
+}
+
+flavor_BEH.46 = { #The Muhtasib Inspectors
+	type = country_event
+	title = flavor_BEH.46.title
+	desc = flavor_BEH.46.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1800.1.1
+		monthly_chance = 1
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:burghers_estate }
+	}
+
+	illustration_tags = {
+		10 = exterior
+		10 = angry
+	}
+
+	trigger = {
+		has_markets = yes
+	}
+
+	option = {
+		name = flavor_BEH.46.a
+		historical_option = yes
+		change_gold_effect = { scale = -6 }
+		unlock_estate_privilege_effect = {
+			type = BEH_mnout_en_agora
+		}
+		add_estate_satisfaction = {
+			type = estate_type:burghers_estate
+			value = estate_satisfaction_mild_bonus
+		}
+	}
+
+	option = {
+		name = flavor_BEH.46.b
+		add_estate_satisfaction = {
+			type = estate_type:burghers_estate
+			value = estate_satisfaction_severe_penalty
+		}
+	}
+}
+
+flavor_BEH.47 = { #Royal Mamluks
+	hide_portraits = yes
+	type = country_event
+	title = flavor_BEH.47.title
+	desc = flavor_BEH.47.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1500.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = {
+	10 = regular
+	10 = exterior
+	}
+
+	trigger = {
+		has_ruler = yes
+		has_advance = royal_hibaeys
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = target_ruler
+		}
+		event_illustration_poptype_effect = { foreground = pop_type:soldiers background = pop_type:soldiers }
+	}
+
+	option = {
+		name = flavor_BEH.47.a
+		add_army_tradition = army_tradition_extreme_bonus
+	}
+}
+
+flavor_BEH.48 = { #Printing Press
+	type = country_event
+	title = flavor_BEH.48.title
+	desc = flavor_BEH.48.desc
+	image = "gfx/interface/illustrations/institutions/printing_press.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1430.1.1
+		to = 1560.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = {
+		regular = 10
+		interior = 10
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:burghers_estate }
+		if = {
+			limit = {
+				current_year < 1550
+			}
+			create_character = {
+				birth_location = location:soncino
+				religion = religion:judaism
+				adm = { 20 70 }
+				dip = { 20 70 }
+				mil = { 20 40 }
+				culture = culture:ashkenazi
+				estate = estate_type:burghers_estate
+				save_scope_as = target_character
+				create_in_limbo = yes
+			}
+		}
+		else = {
+			create_character = {
+				first_name = name_gershom
+				last_name = bin_Eliezer_Soncino
+				birth_date = 1513.4.5
+				birth_location = location:soncino
+				estate = estate_type:burghers_estate
+				religion = religion:judaism
+				adm = { 20 70 }
+				dip = { 20 70 }
+				mil = { 20 40 }
+				culture = culture:ashkenazi
+				save_scope_as = target_character
+				create_in_limbo = yes
+			}
+		}
+	}
+
+	trigger = {
+		knows_about_institution = institution:printing_press
+		NOT = {	has_embraced_institution = institution:printing_press }
+		owns = location:cairo
+	}
+
+	option = {
+		name = flavor_BEH.48.a
+		scope:target_character = {
+			move_country = root
+		}
+		location:cairo = {
+			change_institution_progress = { type = institution:printing_press value = institution_progress_mild_bonus }
+		}
+	}
+
+	option = {
+		name = flavor_BEH.48.b
+		change_gold_effect = { scale = -4 }
+		scope:target_character = {
+			move_country = root
+		}
+		location:cairo = {
+			change_institution_progress = { type = institution:printing_press value = institution_progress_ultimate_bonus }
+		}
+	}
+
+	option = {
+		name = flavor_BEH.48.c
+   		kill_character_silently = scope:target_character
+		add_estate_satisfaction = { type = estate_type:clergy_estate value = estate_satisfaction_mild_bonus }
+	}
+}
+
+flavor_BEH.49 = { #Europeans Circumnavigate Africa
+	type = country_event
+	title = flavor_BEH.49.title
+	desc = flavor_BEH.49.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1800.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = {
+		10 = angry
+		10 = exterior
+	}
+
+	trigger = {
+		modifier:may_explore = yes
+		sub_continent:western_europe = {
+			any_present_country = {
+				discovered_route_to_india = yes
+			}
+		}
+	}
+
+	immediate = {
+		event_illustration_estate_effect = { foreground = estate_type:burghers_estate background = estate_type:burghers_estate }
+	}
+
+
+	option = {
+		name = flavor_BEH.49.a
+		add_prestige = prestige_severe_penalty
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_severe_penalty }
+	}
+
+	option = {
+		name = flavor_BEH.49.b
+		historical_option = yes
+		custom_tooltip = flavor_BEH.49.b.tt
+		change_gold_effect = { scale = -4 }
+		add_prestige = prestige_weak_penalty
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_weak_penalty }
+		create_character = {
+			trait_category = explorer
+		}
+		set_variable = BEH_enable_exploration_events
+	}
+}
+
+flavor_BEH.50 = { #Rising Demand of Ship Supplies
+	type = country_event
+	title = flavor_BEH.50.title
+	desc = flavor_BEH.50.desc
+	image = "gfx/interface/icons/trade_goods/illustrations/icon_goods_naval_supplies.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1800.1.1
+		monthly_chance = 1
+	}
+
+	trigger = {
+		has_variable = BEH_enable_exploration_events
+		any_exploration_from_country = {
+			has_leader = yes
+		}
+	}
+
+	option = {
+		name = flavor_BEH.50.a
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_mild_bonus }
+		capital = {
+			market = {
+				add_temporary_demand = { type = demand:demands_of_ships months = 240 scale_with_pop = 0.002 }
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.50.b
+		change_gold_effect = { scale = -4 }
+		add_estate_satisfaction = { type = estate_type:burghers_estate value = estate_satisfaction_severe_bonus }
+		capital = {
+			market = {
+				add_temporary_demand = { type = demand:demands_of_ships months = 240 scale_with_pop = 0.008 }
+			}
+		}
+		custom_tooltip = {
+			text = flavor_BEH.50.b.tt
+			every_owned_location = {
+				if = {
+					limit = {
+						has_building = building_type:naval_supplies_guild
+					}
+					change_prosperity = prosperity_severe_bonus
+				}
+			}
+		}
+	}
+}
+
+flavor_BEH.51 = { #Eclipsing Portugal
+	hide_portraits = yes
+	type = country_event
+	title = flavor_BEH.51.title
+	desc = flavor_BEH.51.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1800.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = happy
+		10 = exterior
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = target_ruler
+		}
+		c:POR ?= {
+			ruler = {
+				save_scope_as = target_ruler2
+			}
+		}
+		 event_illustration_government_estate_effect = yes
+	}
+
+	trigger = {
+		has_ruler = yes
+		has_variable = BEH_enable_exploration_events
+		country_exists = c:POR
+		c:POR ?= {
+			is_rival_of = root
+            navy_size < ROOT.navy_size
+        }
+	}
+
+	option = {
+		name = flavor_BEH.51.a
+		historical_option = yes
+		add_navy_tradition = navy_tradition_severe_bonus
+	}
+}
+
+flavor_BEH.52 = { #Amir Husain Al-Kurdi
+	type = country_event
+	title = flavor_BEH.52.title
+	desc = flavor_BEH.52.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1505.1.1
+		to = 1520.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = {
+	10 = regular
+	10 = exterior
+	}
+
+	immediate = {
+		location:rashid ?= {
+			create_dynasty_from_location = phoebus_dynasty
+		}
+		create_character = {
+			first_name = name_zyad
+			last_name = name_phoebus
+			birth_date = 1480.2.9
+			birth_location = location:rashid
+			estate = estate_type:nobles_estate
+			adm = 70
+			dip = 30
+			mil = 90
+			dynasty = dynasty:phoebus_dynasty
+			culture = culture:behaeiry
+			save_scope_as = target_character
+			create_in_limbo = yes
+			religion = religion:tanwyr
+		}
+		event_illustration_poptype_effect = { foreground = pop_type:soldiers background = pop_type:soldiers }
+	}
+
+	trigger = {
+		has_variable = BEH_enable_exploration_events
+	}
+
+	option = {
+		name = flavor_BEH.52.a
+		scope:target_character = {
+			move_country = root
+			add_random_trait_from_category = admiral
+			add_character_modifier = {
+				modifier = refuses_to_serve_in_cabinet
+				years = -1
+				mode = add_and_extend
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.52.b
+		scope:target_character = {
+			move_country = root
+			add_trait = trait:unsuited_for_naval_command
+			add_trait = trait:unsuited_for_army_command
+			remove_character_modifier = refuses_to_serve_in_cabinet
+		}
+	}
+
+	option = {
+		name = flavor_BEH.52.c
+		add_navy_tradition = navy_tradition_severe_bonus
+   		kill_character_silently = scope:target_character
+	}
+}
+
+flavor_BEH.53 = { #The Red Sea Fleet
+	type = country_event
+	title = flavor_BEH.53.title
+	desc = flavor_BEH.53.desc
+	image = "gfx/interface/icons/trade_goods/illustrations/icon_goods_naval_supplies.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1600.1.1
+		monthly_chance = 1
+	}
+
+	trigger = {
+		own_entire_province = province_definition:red_sea_coast_province
+		has_variable = BEH_enable_exploration_events
+		has_ruler = yes
+	}
+
+	immediate = {
+		province_definition:red_sea_coast_province = {
+			random_location_in_province_definition = {
+				limit = {
+					owner = root
+					is_port = yes
+				}
+				save_scope_as = target_location
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.53.a
+		scope:target_location = {
+			create_sub_unit_of_category = sub_unit_category:navy_galley
+			create_sub_unit_of_category = sub_unit_category:navy_galley
+			create_sub_unit_of_category = sub_unit_category:navy_galley
+			create_sub_unit_of_category = sub_unit_category:navy_galley
+			create_sub_unit_of_category = sub_unit_category:navy_galley
+		}
+	}
+
+	option = {
+		name = flavor_BEH.53.b
+		scope:target_location = {
+			create_sub_unit_of_category = sub_unit_category:navy_transport
+			create_sub_unit_of_category = sub_unit_category:navy_transport
+			create_sub_unit_of_category = sub_unit_category:navy_transport
+			create_sub_unit_of_category = sub_unit_category:navy_transport
+			create_sub_unit_of_category = sub_unit_category:navy_transport
+		}
+	}
+}
+
+flavor_BEH.55 = { #The Great Naval Reform
+	type = country_event
+	fire_only_once = yes
+	title = flavor_BEH.55.title
+	desc = flavor_BEH.55.desc
+	image = "gfx/interface/illustrations/government/throne_rooms/throne_room_syrian.dds"
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1505.1.1
+		to = 1520.1.1
+		monthly_chance = 10
+	}
+
+	trigger = {
+		ruler ?= { mil > 50 }
+		at_war = no
+		has_variable = BEH_enable_exploration_events
+	}
+
+	immediate = {
+		location:cairo = {
+			create_dynasty_from_location = adrae_dynasty
+		}
+		create_character = {
+			first_name = name_hercules
+			dynasty = dynasty:adrae_dynasty
+			estate = estate_type:nobles_estate
+			adm = 67
+			dip = 32
+			mil = 82
+			birth_date = 1471.4.8
+			culture = culture:behaeiry
+			religion = religion:tanwyr
+			birth_location = location:cairo
+			save_scope_as = target_character
+			script = beh_yaeraklas
+		}
+	}
+
+	option = {
+		name = flavor_BEH.55.a
+        scope:target_character = {
+            move_country = root
+		}
+		change_gold_effect = { scale = -6 }
+		add_navy_tradition = navy_tradition_severe_bonus
+		change_societal_value = { type = quality_vs_quantity value = societal_value_move_to_left }
+		change_societal_value = { type = land_vs_naval value = societal_value_move_to_right }
+		change_societal_value = { type = traditionalist_vs_innovative value = societal_value_move_to_right }
+	}
+
+	option = {
+		name = flavor_BEH.55.b
+        scope:target_character = {
+            move_country = root
+		}
+		change_gold_effect = { scale = -3 }
+		add_navy_tradition = navy_tradition_mild_bonus
+		change_societal_value = { type = quality_vs_quantity value = societal_value_minor_move_to_left }
+		change_societal_value = { type = land_vs_naval value = societal_value_minor_move_to_right }
+		change_societal_value = { type = traditionalist_vs_innovative value = societal_value_minor_move_to_right }
+	}
+
+	option = {
+		name = flavor_BEH.55.c
+		add_prestige = prestige_mild_penalty
+		hidden_effect = {
+   			kill_character_silently = scope:target_character
+  		}
+	}
+}
+
+flavor_BEH.56 = { #Administrative Reform
+	type = country_event
+	title = flavor_BEH.56.title
+	desc = flavor_BEH.56.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1380.1.1
+		to = 1450.1.1
+		monthly_chance = 1
+	}
+
+	illustration_tags = {
+		10 = regular
+		10 = interior
+	}
+
+	trigger = {
+		"culture_percentage_in_country(culture:bedouin_culture)" > 0
+		culture != culture:bedouin_culture
+	}
+
+	immediate = {
+		event_illustration_government_estate_effect = yes
+	}
+
+	option = {
+		name = flavor_BEH.56.a
+		add_stability = stability_mild_bonus
+		change_societal_value = {
+			type = centralization_vs_decentralization
+			value = societal_value_move_to_left
+		}
+		custom_tooltip = {
+			text = flavor_BEH.56.a.tt
+			every_province = {
+				every_location_in_province = {
+					every_pop = {
+						limit = {
+							owner = root
+							culture = culture:bedouin_culture
+						}
+						add_pop_satisfaction = pop_satisfaction_severe_penalty
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.56.b
+		add_stability = stability_mild_penalty
+		change_societal_value = {
+			type = centralization_vs_decentralization
+			value = societal_value_move_to_right
+		}
+	}
+}
+
+flavor_BEH.57 = { #Bedouin Tribal Wars in a Location
+	type = country_event
+	title = flavor_BEH.57.title
+	desc = flavor_BEH.57.desc
+
+	trigger = {
+		tag = BEH
+		"culture_percentage_in_country(culture:bedouin_culture)" > 0
+		culture != culture:bedouin_culture
+		NOT = {
+			has_variable = BEH_had_bedouin_war
+		}
+	}
+
+	immediate = {
+		set_variable = { name = BEH_had_bedouin_war days = 9125 }
+		random_owned_location = {
+			limit = {
+				local_cultural_unity < 1
+				any_pop = {
+					culture = culture:bedouin_culture
+				}
+				controller = root
+			}
+			save_scope_as = target_location
+		}
+	}
+
+	option = {
+		name = flavor_BEH.57.a
+		scope:target_location = {
+			change_prosperity = prosperity_extreme_penalty
+			every_pop = {
+				limit = {
+					NOT = { culture = culture:bedouin_culture }
+				}
+				add_pop_size = {
+					value = pop_size
+					multiply = -0.1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.57.b
+		scope:target_location = {
+			every_pop = {
+				limit = {
+					culture = culture:bedouin_culture
+				}
+				add_pop_size = {
+					value = pop_size
+					multiply = -0.2
+				}
+			}
+		}
+	}
+}
+
+flavor_BEH.58 = {
+	type = country_event
+	title = flavor_BEH.58.title
+	desc = flavor_BEH.58.desc
+
+	fire_only_once = yes
+
+	historical_info = flavor_BEH.58.historical_info
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1380.1.1
+		to = 1400.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = {
+		10 = happy
+		10 = interior
+	}
+
+	trigger = {
+		has_ruler = yes
+		is_during_bankruptcy = no
+		owns = location:cairo
+	}
+
+	immediate = {
+		create_character = {
+			estate = estate_type:clergy_estate
+			first_name = name_bishoy
+			last_name = name_demetrius
+			birth_date = 1341.2.9
+			birth_location = location:cairo
+			artist = writer
+			artist_skill = 0.85
+			adm = { 60 90 }
+			dip = { 60 90 }
+			mil = { 20 30 }
+			script = en_demetrius_script
+			save_scope_as = target_character
+			create_in_limbo = yes
+		}
+		random_neighbor_country = {
+			save_scope_as = target_country
+		}
+		event_illustration_estate_effect = { foreground = estate_type:clergy_estate background = estate_type:clergy_estate }
+	}
+
+	option = {
+		name = flavor_BEH.58.a
+		historical_option = yes
+		change_gold_effect = { scale = -3 }
+		scope:target_character = { move_country = root }
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_right
+		}
+		culture = {
+			add_cultural_tradition = cultural_tradition_weak_bonus
+			add_cultural_influence = cultural_influence_weak_bonus
+		}
+		location:cairo = {
+			create_art = {
+				artist = scope:target_artist
+				quality = 86
+				type = work_of_art_type:treatise 
+				key = bi_onkh_en_ni_dwnae
+			}
+		}
+		change_gold_effect = { scale = -2 }
+		
+	}
+
+	option = {
+		name = flavor_BEH.58.b
+		add_prestige = prestige_weak_penalty
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_left
+		}
+		if = {
+			limit = {
+				exists = scope:target_country
+			}
+			scope:target_character = {
+				move_country = scope:target_country
+			}
+		}
+		else = {
+			hidden_effect = {
+				kill_character_silently = scope:target_character
+			}
+		}
+	}
+}
+
+#Ibn Ilyas
+flavor_BEH.59 = {
+	type = country_event
+	title = flavor_BEH.59.title
+	desc = flavor_BEH.59.desc
+	image = "gfx/interface/illustrations/institutions/legalism.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1480.1.1
+		to = 1500.1.1
+		monthly_chance = 10
+	}
+
+	trigger = {
+		is_during_bankruptcy = no
+		owns = location:cairo
+	}
+
+	immediate = {
+		create_character = {
+			estate = estate_type:clergy_estate
+			first_name = name_matthias
+			last_name = name_elias
+			birth_date = 1448.2.4
+			birth_location = location:cairo
+			artist = writer
+			artist_skill = 0.9
+			adm = { 60 90 }
+			dip = { 60 90 }
+			mil = { 20 30 }
+			script = en_ilyas_script
+			save_scope_as = target_character
+			create_in_limbo = yes
+		}
+		random_neighbor_country = {
+			save_scope_as = target_country
+		}
+	}
+
+	option = {
+		name = flavor_BEH.59.a
+		historical_option = yes
+		change_gold_effect = { scale = -3 }
+		scope:target_character = {
+			move_country = root
+			add_trait = trait:prominent
+		}
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_right
+		}
+		create_art = {
+				artist = scope:target_artist
+				quality = 95
+				type = work_of_art_type:chronicle 
+				key = aigybdyaka_ii
+			}
+		}
+		change_gold_effect = { scale = -2 }
+		add_research_progress = research_progress_extreme_bonus
+		culture = {
+			add_cultural_tradition = cultural_tradition_extreme_bonus
+			add_cultural_influence = cultural_influence_extreme_bonus
+		}
+	}
+
+	option = {
+		name = flavor_BEH.59.b
+		add_prestige = prestige_weak_penalty
+		change_societal_value = {
+			type = traditionalist_vs_innovative
+			value = societal_value_move_to_left
+		}
+		hidden_effect = {
+			kill_character_silently = scope:target_character
+		}
+	}
+}
+
+#Custodian of the Holy Cities
+flavor_BEH.60 = {
+	type = country_event
+	title = flavor_BEH.60.title
+	desc = flavor_BEH.60.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1836.1.1
+		monthly_chance = 10
+	}
+
+	illustration_tags = { 
+		10 = happy
+		10 = exterior
+	} 
+
+	trigger = {
+		has_ruler = yes
+		owns = location:alexandria
+		owns = location:cairo
+		owns = location:jerusalem
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = target_ruler
+		}
+		event_illustration_estate_effect = { foreground = estate_type:peasants_estate background = estate_type:clergy_estate }
+	}
+
+	option = {
+		name = flavor_BEH.60.a
+		change_societal_value = { type = mysticism_vs_jurisprudence value = societal_value_move_to_right }
+		add_prestige = prestige_severe_bonus
+		add_estate_satisfaction = { type = estate_type:clergy_estate value = estate_satisfaction_mild_bonus }
+	}
+}
+
+flavor_BEH.70 = {
+	type = country_event
+	title = flavor_BEH.70.title
+	desc = flavor_BEH.70.desc
+
+	trigger = {
+		has_reform = government_reform:maersh_reform
+		NOT = { has_variable = BEH_ruler_invested_in_cairo }
+		location:cairo = {
+			is_capital_of = {
+				target = root
+			}
+		}
+	}
+
+	immediate = {
+		ruler_or_regent ?= {
+			save_scope_as = target_character
+		}
+		capital ?= {
+			save_scope_as = target_location
+		}
+	}
+
+	option = {
+		name = flavor_BEH.70.a
+		scope:target_location.market = {
+			add_merchant_power = {
+				country = root
+				key = bolstered_capital_trade
+				months = 120
+				power = 25
+			}
+		}
+		add_gold = {
+			value = monthly_income_total
+			min = 10
+			max = 1000
+			multiply = -1
+		}
+	}
+
+	option = {
+		name = flavor_BEH.70.b
+		scope:target_location = {
+			change_development = development_mild_bonus
+		}
+		add_gold = {
+			value = monthly_income_total
+			min = 10
+			max = 1000
+			multiply = -1
+		}
+	}
+
+	option = {
+		name = flavor_BEH.70.c
+		add_estate_satisfaction = {
+			type = estate_type:clergy_estate
+			value = estate_satisfaction_mild_bonus
+		}
+		change_societal_value = { type = mysticism_vs_jurisprudence value = societal_value_tiny_move_to_right }
+		add_gold = {
+			value = monthly_income_total
+			min = 10
+			max = 1000
+			multiply = -1
+		}
+	}
+
+	option = {
+		name = flavor_BEH.70.d
+		add_legitimacy = legitimacy_mild_bonus
+		add_prestige = prestige_mild_bonus
+		add_gold = {
+			value = monthly_income_total
+			min = 10
+			max = 1000
+			multiply = -1
+		}
+	}
+
+	option = {
+		name = flavor_BEH.70.e
+		add_legitimacy = legitimacy_mild_penalty
+	}
+
+	after = {
+		set_variable = BEH_ruler_invested_in_cairo
+	}
+}
+
+flavor_BEH.74 = {
+	type = country_event
+	title = flavor_BEH.74.title
+	desc = flavor_BEH.74.desc
+	trigger = {
+		has_reform = government_reform:maersh_reform
+		at_war = no
+		ruler_or_regent ?= {
+			OR = {
+				mil >= 65
+				has_trait = martial_educator
+			}
+		}
+	}
+
+	immediate = {
+		ruler_or_regent ?= {
+			save_scope_as = target_character
+		}
+	}
+
+	option = {
+		name = flavor_BEH.74.a
+
+		add_army_tradition = {
+			value = army_tradition_weak_bonus
+			add = {
+				value = scope:target_character.mil
+				divide = 20
+			}
+		}
+	}
+
+	option = {
+		name = flavor_BEH.74.b
+		add_gold = {
+			value = monthly_income_total
+			min = 10
+			multiply = -2
+		}
+		add_army_tradition = {
+			value = army_tradition_weak_bonus
+			add = {
+				value = scope:target_character.mil
+				divide = 10
+			}
+		}
+		add_estate_satisfaction = {
+			type = estate_type:nobles_estate
+			value = estate_satisfaction_mild_bonus
+		}
+	}
+}
+
+flavor_BEH.77 = {
+	type = country_event
+	title = flavor_BEH.77.title
+	desc = flavor_BEH.77.desc
+	image = "gfx/interface/icons/trade_goods/illustrations/icon_goods_wheat.dds"
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1337.1.1
+		to = 1836.1.1
+		monthly_chance = 1
+	}
+
+	trigger = {
+		any_market_present_in_country = { is_produced_in_market = goods:wheat }
+		total_effective_building_levels:granary > 0
+	}
+
+
+	option = {
+		name = flavor_BEH.77.a
+		historical_option = yes
+		change_gold_effect = { scale = -2 }
+		ordered_owned_location = {
+			limit = {
+				raw_material = goods:wheat
+			}
+			order_by = population
+			max = 3
+			add_location_modifier = { modifier = BEH_granary_of_the_mediterranean years = 20 mode = add }
+		}
+	}
+
+	option = {
+		name = flavor_BEH.77.b
+		add_prestige = prestige_mild_penalty
+	}
+}
+
+flavor_BEH.78 = {
+	type = country_event
+	title = flavor_BEH.78.title
+	desc = flavor_BEH.78.desc
+
+	fire_only_once = yes
+
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1455.1.1
+		to = 1470.1.1
+		monthly_chance = 1
+	}
+	
+	illustration_tags = {
+		10 = regular
+		10 = interior
+	}
+
+	trigger = {
+		owns = location:cairo
+	}
+
+	immediate = {
+		create_character = {
+			estate = estate_type:clergy_estate
+			first_name = name_shons
+			last_name = name_sedakiel
+			birth_date = 1428.1.1
+			birth_location = location:cairo
+			artist = writer
+			artist_skill = { 0.7 0.85 }
+			save_scope_as = target_character
+			create_in_limbo = yes
+		}
+		event_illustration_estate_effect = { foreground = estate_type:clergy_estate background = estate_type:nobles_estate }
+	}
+
+	option = {
+		name = flavor_BEH.78.a
+		historical_option = yes
+		change_gold_effect = { scale = -3 }
+		scope:target_character = {
+			move_country = root
+		}
+		add_research_progress = research_progress_mild_bonus
+		change_societal_value = { type = traditionalist_vs_innovative value = societal_value_move_to_right }
+	}
+
+	option = {
+		name = flavor_BEH.78.b
+		add_research_progress = research_progress_mild_penalty
+		change_societal_value = { type = traditionalist_vs_innovative value = societal_value_move_to_left }
+		hidden_effect = {
+   			kill_character_silently = scope:target_character
+  		}
+	}
+}
+
+#Mansa Mūsā's Repercussions
+flavor_BEH.100 = {
+	type = country_event
+	title = flavor_BEH.100.title
+	desc = flavor_BEH.100.desc
+
+	fire_only_once = yes
+	dynamic_historical_event = {
+		tag = BEH
+		from = 1300.1.1
+		to = 1340.1.1
+		monthly_chance = 80
+	}
+
+	trigger = {
+		region = region:egypt_region
+	}
+
+	immediate = {
+		character:mal_musa_keita = {
+			save_scope_as = mansa_musa
+		}
+	}
+
+	#At least the worst is over
+	option = {
+		name = flavor_BEH.100.a
+		historical_option = yes
+		capital.market = {
+			add_temporary_demand = {
+				type = demand:BEH_mansa_musas_visit
+				months = 24
+				scale_with_pop = 0.003
+			}
+			add_goods_supply = {
+				goods = goods:goods_gold
+				amount = market_goods_ultimate_bonus
+			}
+			add_goods_supply = {
+				goods = goods:gems
+				amount = market_goods_severe_gain
+			}
+			add_goods_supply = {
+				goods = goods:salt
+				amount = market_goods_mild_gain
+			}
+		}
+		add_inflation = inflation_extreme_penalty
+	}
+}
