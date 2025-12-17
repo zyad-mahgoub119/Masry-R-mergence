@@ -1,102 +1,173 @@
+"""
+Log Processor Script
+====================
+Processes error logs by removing duplicates and sorting by frequency.
+Tracks new errors across runs and maintains rotation of historical logs.
+
+Usage:
+    python process_log.py
+"""
+
 import re
 import os
 from collections import defaultdict
-
 from tools.shared.fetch_logs import get_log_directory_from_config
 
-def process_log(p_file_error, p_file_error_cleaned, p_file_error_cleaned_old, p_file_error_cleaned_oldest):
-	# Handle log file rotation
-	if os.path.exists(p_file_error_cleaned_oldest):
-		os.remove(p_file_error_cleaned_oldest)  # Overwrite the oldest file
-	if os.path.exists(p_file_error_cleaned_old):
-		os.rename(p_file_error_cleaned_old, p_file_error_cleaned_oldest)
-	if os.path.exists(p_file_error_cleaned):
-		os.rename(p_file_error_cleaned, p_file_error_cleaned_old)
 
-	# Read the previous cleaned_error_old.log for comparison
-	old_entries = set()
-	if os.path.exists(p_file_error_cleaned_old):
-		with open(p_file_error_cleaned_old, 'r', encoding='utf-8') as old_log_file:
-			old_log_content = old_log_file.read()
-			# Extract the actual log content (without COUNT)
-			old_entries = {entry.strip() for entry in re.split(r'COUNT:\d+.*?\n\n', old_log_content)}
+def rotate_log_files(cleaned, old, oldest):
+    """Rotate log files: cleaned -> old -> oldest."""
+    if os.path.exists(oldest):
+        os.remove(oldest)
+    if os.path.exists(old):
+        os.rename(old, oldest)
+    if os.path.exists(cleaned):
+        os.rename(cleaned, old)
 
-	try:
-		with open(p_file_error, 'r', encoding='utf-8') as file:
-			log_entries = file.readlines()
-	except UnicodeDecodeError:
-		# Try a different encoding if utf-8 fails
-		with open(p_file_error, 'r', encoding='latin-1') as file:
-			log_entries = file.readlines()
 
-	# Regular expression to remove timestamps and identify file references at the start of each entry
-	timestamp_pattern = re.compile(r'\[\d{2}:\d{2}:\d{2}\]')
-	file_ref_pattern = re.compile(r'^\[.*\.cpp:\d+\]')  # Match file_name.cpp:number pattern
+def load_old_entries(filepath):
+    """Load previous log entries for comparison."""
+    if not os.path.exists(filepath):
+        return set()
+    
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Extract log entries without COUNT metadata
+            entries = re.split(r'COUNT:\d+.*?\n\n', content)
+            return {entry.strip() for entry in entries if entry.strip()}
+    except (IOError, UnicodeDecodeError) as e:
+        print(f"Warning: Could not read old log file: {e}")
+        return set()
 
-	cleaned_log = []
-	current_entry = []
-	entries_count = defaultdict(int)
 
-	for line in log_entries:
-		# Remove timestamps
-		line_without_timestamp = timestamp_pattern.sub('', line).strip()
+def read_log_file(filepath):
+    """Read log file with fallback encoding."""
+    encodings = ['utf-8', 'latin-1', 'cp1252']
+    
+    for encoding in encodings:
+        try:
+            with open(filepath, 'r', encoding=encoding) as f:
+                return f.readlines()
+        except (UnicodeDecodeError, IOError):
+            continue
+    
+    raise IOError(f"Could not read log file with supported encodings: {filepath}")
 
-		# Check if this is a new log entry (based on [file_name.cpp:number] pattern)
-		if file_ref_pattern.match(line_without_timestamp):
-			# If we have accumulated a previous entry, add it to the cleaned log
-			if current_entry:
-				entry_str = '\n'.join(current_entry).strip()
-				entries_count[entry_str] += 1
-				current_entry = []
 
-		current_entry.append(line_without_timestamp)
+def parse_log_entries(log_lines):
+    """Parse log entries and count occurrences."""
+    # Patterns for cleaning and parsing
+    timestamp_pattern = re.compile(r'\[\d{2}:\d{2}:\d{2}\]')
+    file_ref_pattern = re.compile(r'^\[.*\.cpp:\d+\]')
+    
+    entries_count = defaultdict(int)
+    current_entry = []
+    
+    for line in log_lines:
+        # Remove timestamps
+        cleaned_line = timestamp_pattern.sub('', line).strip()
+        
+        # Check if this is a new log entry
+        if file_ref_pattern.match(cleaned_line):
+            if current_entry:
+                entry_str = '\n'.join(current_entry).strip()
+                entries_count[entry_str] += 1
+                current_entry = []
+        
+        if cleaned_line:  # Only append non-empty lines
+            current_entry.append(cleaned_line)
+    
+    # Don't forget the last entry
+    if current_entry:
+        entry_str = '\n'.join(current_entry).strip()
+        entries_count[entry_str] += 1
+    
+    return entries_count
 
-	# Don't forget the last entry
-	if current_entry:
-		entry_str = '\n'.join(current_entry).strip()
-		entries_count[entry_str] += 1
 
-	# Sort entries by count in descending order
-	sorted_entries = sorted(entries_count.items(), key=lambda x: x[1], reverse=True)
+def format_output_entry(entry, count, old_entries, max_lines=3):
+    """Format a single log entry with metadata."""
+    lines = entry.split('\n')
+    
+    # Truncate if needed
+    if len(lines) > max_lines:
+        entry_text = '\n'.join(lines[:max_lines])
+        shortened = True
+    else:
+        entry_text = entry
+        shortened = False
+    
+    # Build metadata line
+    metadata = f"COUNT:{count}"
+    if entry_text not in old_entries:
+        metadata += "  !! NEW !!"
+    if shortened:
+        metadata += "  (entry shortened)"
+    
+    return f"{metadata}\n\n{entry_text}\n\n"
 
-	# Now merge repeated entries, place "COUNT:x" in front, and limit to 3 lines if needed
-	for entry, count in sorted_entries:
-		lines = entry.split('\n')
 
-		# Check if entry has more than 3 lines
-		if len(lines) > 3:
-			entry_truncated = '\n'.join(lines[:3])
-			shortened = True
-		else:
-			entry_truncated = entry
-			shortened = False
+def write_cleaned_log(entries_count, old_entries, output_path):
+    """Write the cleaned and sorted log file."""
+    # Sort by count descending
+    sorted_entries = sorted(entries_count.items(), key=lambda x: x[1], reverse=True)
+    
+    # Format all entries
+    output_lines = [
+        format_output_entry(entry, count, old_entries)
+        for entry, count in sorted_entries
+    ]
+    
+    # Write to file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.writelines(output_lines)
+    
+    return len(sorted_entries)
 
-		# Add COUNT at the beginning
-		count_line = f"COUNT:{count}"
 
-		# Check if the truncated entry is new by comparing with old log entries
-		if entry_truncated not in old_entries:
-			count_line += "	 !! NEW !!"
+def process_log(error_log, cleaned_log, old_log, oldest_log):
+    """Main processing function."""
+    # Rotate existing log files
+    rotate_log_files(cleaned_log, old_log, oldest_log)
+    
+    # Load previous entries for comparison
+    old_entries = load_old_entries(old_log)
+    
+    # Read and parse current log
+    log_lines = read_log_file(error_log)
+    entries_count = parse_log_entries(log_lines)
+    
+    # Write cleaned output
+    num_entries = write_cleaned_log(entries_count, old_entries, cleaned_log)
+    
+    print(f"✓ Processed {len(log_lines)} lines into {num_entries} unique entries")
+    print(f"✓ Output saved to: {cleaned_log}")
 
-		if shortened:
-			count_line += "		  (entry shortened)"
 
-		cleaned_log.append(f"{count_line}\n\n{entry_truncated}\n\n")
+def main():
+    """Entry point for the script."""
+    try:
+        config_path = get_log_directory_from_config()
+        
+        # Define file paths
+        error_log = os.path.join(config_path, 'error.log')
+        cleaned_log = os.path.join(config_path, 'cleaned_error.log')
+        old_log = os.path.join(config_path, 'cleaned_error_old.log')
+        oldest_log = os.path.join(config_path, 'cleaned_error_oldest.log')
+        
+        # Verify input file exists
+        if not os.path.exists(error_log):
+            print(f"Error: Log file not found: {error_log}")
+            return 1
+        
+        # Process the log
+        process_log(error_log, cleaned_log, old_log, oldest_log)
+        return 0
+        
+    except Exception as e:
+        print(f"Error processing log: {e}")
+        return 1
 
-	# Output the cleaned log
-	output_file = p_file_error_cleaned
-	with open(output_file, 'w', encoding='utf-8') as output:
-		output.writelines(cleaned_log)
-
-	print(f"Processed log saved to {output_file}")
 
 if __name__ == '__main__':
-	config_path = get_log_directory_from_config()
-
-	file_error = config_path + 'error.log'
-	file_error_cleaned = config_path + 'cleaned_error.log'
-	file_error_cleaned_old = config_path + 'cleaned_error_old.log'
-	file_error_cleaned_oldest = config_path + 'cleaned_error_oldest.log'
-
-	# Call the function with the path to your error.log
-	process_log(file_error, file_error_cleaned, file_error_cleaned_old, file_error_cleaned_oldest)
+    exit(main())
